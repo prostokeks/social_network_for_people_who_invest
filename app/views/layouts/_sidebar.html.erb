@@ -9,7 +9,7 @@
       <div>
         <h2 class="text-lg font-semibold text-white"><%= current_user.name %> <%= current_user.last_name %></h2>
         <span class="flex items-center space-x-1">
-        <%= link_to "View profile", static_pages_profile_path(current_user), class: "text-xs hover:underline dark:text-gray-400" %>
+        <%= link_to "View profile", root_path, class: "text-xs hover:underline dark:text-gray-400" %>
 			</span>
       </div>
     </div>
