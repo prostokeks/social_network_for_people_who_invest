@@ -3,4 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  WORKGROUP=["User", "Moderator", "Admin"]
+  GENDER=["Male", "Female"]
+
 end
