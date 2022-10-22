@@ -1,3 +1,7 @@
-<div>
-  Hello
-</div>
+<% if user_signed_in? %>
+  <%= render "static_pages/profile" %>
+<% else %>
+  <div>
+    Hello
+  </div>
+<% end %>
