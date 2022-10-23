@@ -1,0 +1,28 @@
+<%= form_with model: @forum do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_field :body %>
+  </div>
+  <div>
+    <%= f.label :status %>
+    <%= f.select :status, Forum::STATUS %>
+  </div>
+  <div>
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar %>
+  </div>
+  <div>
+    <%= f.label :category %>
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |c| %>
+      <div class="collection-check-box">
+        <%= c.check_box %>
+        <%= c.label %>
+      </div>
+    <% end %>
+  </div>
+  <%= f.submit "Submit" %>
+<% end %>

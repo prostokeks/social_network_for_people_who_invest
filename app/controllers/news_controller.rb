@@ -1,11 +1,13 @@
 class NewsController < ApplicationController
+
+  before_action :set_news, only: %i[show edit update destroy]
+
   def index
     @search = News.ransack(params[:q])
     @news = @search.result(distinct: true)
   end
 
   def show
-    @new = News.find(params[:id])
   end
 
   def new
@@ -22,11 +24,9 @@ class NewsController < ApplicationController
   end
 
   def edit
-    @new = News.find(params[:id])
   end
 
   def update
-    @new = News.find(params[:id])
     if @new.update news_params
       redirect_to news_index_path
     else
@@ -35,7 +35,6 @@ class NewsController < ApplicationController
   end
 
   def destroy
-    @new = News.find(params[:id])
     @new.destroy
     redirect_to news_index_path, status: :see_other
   end
@@ -44,5 +43,9 @@ class NewsController < ApplicationController
 
   def news_params
     params.require(:news).permit(:title, :body, :avatar, category_ids:[])
+  end
+
+  def set_news
+    @new = News.find(params[:id])
   end
 end

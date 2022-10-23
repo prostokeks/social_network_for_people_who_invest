@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_23_203210) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_23_212730) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,9 +45,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_23_203210) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "categories_forums", id: false, force: :cascade do |t|
+    t.integer "forum_id", null: false
+    t.integer "category_id", null: false
+  end
+
   create_table "categories_news", id: false, force: :cascade do |t|
     t.integer "news_id", null: false
     t.integer "category_id", null: false
+  end
+
+  create_table "forums", force: :cascade do |t|
+    t.string "title"
+    t.string "body"
+    t.string "status", default: "passive", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_forums_on_user_id"
   end
 
   create_table "news", force: :cascade do |t|
@@ -80,5 +95,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_23_203210) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "forums", "users"
   add_foreign_key "news", "users"
 end

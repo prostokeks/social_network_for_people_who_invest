@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   get 'about', to: 'static_pages#about', as: 'static_pages/about'
 
   resources :news
+  resources :forums
 
 end

@@ -1,0 +1,32 @@
+<fieldset class="search-field">
+  <legend>Search</legend>
+  <%= search_form_for @search do |s| %>
+    <div>
+      <%= s.label :category %><br/>
+      <%= s.collection_check_boxes :categories_id_in_any, Category.all, :id, :name do |c| %>
+        <div class="collection-check-box">
+          <%= c.check_box %>
+          <%= c.label %>
+        </div>
+      <% end %>
+    </div>
+    <div class="actions">
+      <%= s.submit "Search" %>
+    </div>
+  <% end %>
+</fieldset>
+<% @forums.each do |f| %>
+  <% if f.avatar.attached? %>
+    <p><%= image_tag f.avatar, width: "200px" %></p>
+  <% end %>
+  <p><%= f.title %></p>
+  <p><%= f.body %></p>
+  <p><%= f.user_id %></p>
+  <p><%= f.categories.map(&:name).sort.join(", ") %></p>
+  <p><%= link_to "Show", forum_path(f) %></p>
+  <p><%= link_to "Edit", edit_forum_path(f) %></p>
+  <p><%= link_to "Delete", forum_path(f), data: {"turbo-method": :delete,
+                                                turbo_confirm: "You sure?"} %></p>
+<% end %>
+
+<%= link_to "New", new_forum_path %>
