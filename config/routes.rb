@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   get 'profile/:id', to: 'static_pages#profile', as: 'static_pages/profile'
   get 'about', to: 'static_pages#about', as: 'static_pages/about'
 
+  resources :news
+
 end

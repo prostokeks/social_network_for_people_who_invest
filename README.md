@@ -57,6 +57,7 @@ Gem:
 gem "tailwindcss-rails"
 gem "devise"
 gem "pagy"
+gem "ransack"
 
 db:
 

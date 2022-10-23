@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
+  has_many :news
+
   WORKGROUP=["User", "Moderator", "Admin"]
   GENDER=["Male", "Female"]
 

@@ -1,0 +1,24 @@
+<%= form_with model: @new do |n| %>
+  <div>
+    <%= n.label :title %>
+    <%= n.text_field :title %>
+  </div>
+  <div>
+    <%= n.label :body %>
+    <%= n.text_field :body %>
+  </div>
+  <div>
+    <%= n.label :avatar %>
+    <%= n.file_field :avatar %>
+  </div>
+  <div>
+    <%= n.label :category %>
+    <%= n.collection_check_boxes :category_ids, Category.all, :id, :name do |c| %>
+      <div class="collection-check-box">
+        <%= c.check_box %>
+        <%= c.label %>
+      </div>
+    <% end %>
+  </div>
+  <%= n.submit "Submit" %>
+<% end %>

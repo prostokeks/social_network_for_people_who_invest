@@ -1,0 +1,8 @@
+<% if @new.avatar.attached? %>
+  <p><%= image_tag @new.avatar, width: "200px" %></p>
+<% end %>
+<p><%= @new.title %></p>
+<p><%= @new.body %></p>
+<p><%= @new.user_id %></p>
+<p><%= @new.categories.map(&:name).sort.join(", ") %></p>
+<p><%= link_to "Back", :back %></p>
