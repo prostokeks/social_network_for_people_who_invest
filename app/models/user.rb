@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :news
   has_many :forums
+  has_many :articles
 
   WORKGROUP=["User", "Moderator", "Admin"]
   GENDER=["Male", "Female"]

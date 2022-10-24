@@ -1,0 +1,32 @@
+<%= form_with model: @article do |a| %>
+  <div>
+    <%= a.label :title %>
+    <%= a.text_field :title %>
+  </div>
+  <div>
+    <%= a.label :body %>
+    <%= a.text_field :body %>
+  </div>
+  <div>
+    <%= a.label :status %>
+    <%= a.select :status, Article::STATUS %>
+  </div>
+  <div>
+    <%= a.label :avatar %>
+    <%= a.file_field :avatar %>
+  </div>
+  <div>
+    <%= a.label :images %>
+    <%= a.file_field :images, multiple: true %>
+  </div>
+  <div>
+    <%= a.label :category %>
+    <%= a.collection_check_boxes :category_ids, Category.all, :id, :name do |c| %>
+      <div class="collection-check-box">
+        <%= c.check_box %>
+        <%= c.label %>
+      </div>
+    <% end %>
+  </div>
+  <%= a.submit "Submit" %>
+<% end %>

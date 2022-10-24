@@ -1,0 +1,16 @@
+<% if @article.avatar.attached? %>
+  <p><%= image_tag @article.avatar, width: "200px" %></p>
+<% end %>
+<p><%= @article.title %></p>
+<p><%= @article.body %></p>
+<p><%= @article.user_id %></p>
+<p><%= @article.categories.map(&:name).sort.join(", ") %></p>
+<% if @article.images.attached? %>
+  <% @article.images.each do |i| %>
+    <%= image_tag i, width: "200px" %>
+  <% end %>
+<% end %>
+<p><%= link_to "Edit", edit_article_path(@article) %></p>
+<p><%= link_to "Delete", article_path(@article), data: {"turbo-method": :delete,
+                                                 turbo_confirm: "You sure?"} %></p>
+<p><%= link_to "Back", :back %></p>

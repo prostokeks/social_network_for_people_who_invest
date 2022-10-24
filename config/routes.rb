@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   resources :news
   resources :forums
+  resources :articles
 
 end
