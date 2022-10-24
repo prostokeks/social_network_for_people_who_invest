@@ -70,7 +70,7 @@ db:
 (залишилось comments_id + рейтинг)Форум: title, body, status + category_ids + user_id + avatar + comments_id
 Коментарі: body - коментарі котрі прив'язуються до конкретної теми + рейтинг + user_id
 
-(залишилось рейтинг)Статті: title, body, status + user_id + category_ids + avatar, images + рейтинг
+(залишилось comments_id + рейтинг)Статті: title, body, status + user_id + category_ids + comments_id + avatar, images + рейтинг
 
 Курси: title, body, price + category_ids + avatar, images + contacts_id + рейтинг
 Контакти: full_name, email, mobile - форма для замовлення 1 пробного заннятя

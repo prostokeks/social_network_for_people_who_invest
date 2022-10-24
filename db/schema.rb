@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_24_141218) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_24_143844) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -70,6 +70,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_141218) do
     t.integer "category_id", null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "body"
+    t.integer "user_id", null: false
+    t.integer "news_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["news_id"], name: "index_comments_on_news_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "forums", force: :cascade do |t|
     t.string "title"
     t.string "body"
@@ -111,6 +121,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_141218) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "users"
+  add_foreign_key "comments", "news"
+  add_foreign_key "comments", "users"
   add_foreign_key "forums", "users"
   add_foreign_key "news", "users"
 end
