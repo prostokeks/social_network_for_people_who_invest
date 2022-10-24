@@ -1,20 +1,4 @@
-<fieldset class="search-field">
-  <legend>Search</legend>
-  <%= search_form_for @search do |s| %>
-    <div>
-      <%= s.label :category %><br/>
-      <%= s.collection_check_boxes :categories_id_in_any, Category.all, :id, :name do |c| %>
-        <div class="collection-check-box">
-          <%= c.check_box %>
-          <%= c.label %>
-        </div>
-      <% end %>
-    </div>
-    <div class="actions">
-      <%= s.submit "Search" %>
-    </div>
-  <% end %>
-</fieldset>
+<%= render "static_pages/search" %>
 <% @articles.each do |a| %>
   <% if a.avatar.attached? %>
     <p><%= image_tag a.avatar, width: "200px" %></p>

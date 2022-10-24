@@ -61,16 +61,16 @@ gem "ransack"
 
 db:
 
-(залишилось comments_id)Сторінка новини: title, body + category_ids + user_id + avatar + comments_id
+(+)Сторінка новини: title, body + category_ids + user_id + avatar + news_comments_id
 Категорія: name - для фільтрації таблиці новини, форум
 
 Бізнес проекти: title, body, amount_of_investment, payback, business share, location + bp_category_ids + images, pdf, avatar + рейтинг
 БП Категорія: name - для фільтрації таблиці бізнес проекти
 
-(залишилось comments_id + рейтинг)Форум: title, body, status + category_ids + user_id + avatar + comments_id
+(рейтинг)Форум: title, body, status + category_ids + user_id + avatar + forum_comments_id
 Коментарі: body - коментарі котрі прив'язуються до конкретної теми + рейтинг + user_id
 
-(залишилось comments_id + рейтинг)Статті: title, body, status + user_id + category_ids + comments_id + avatar, images + рейтинг
+(рейтинг)Статті: title, body, status + user_id + category_ids + article_comments_id + avatar, images + рейтинг
 
 Курси: title, body, price + category_ids + avatar, images + contacts_id + рейтинг
 Контакти: full_name, email, mobile - форма для замовлення 1 пробного заннятя

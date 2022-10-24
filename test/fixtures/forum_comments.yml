@@ -3,13 +3,9 @@
 one:
   body: MyString
   user: one
-  news: one
-  article: one
   forum: one
 
 two:
   body: MyString
   user: two
-  news: two
-  article: two
   forum: two

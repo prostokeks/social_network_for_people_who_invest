@@ -1,26 +1,15 @@
-class CommentsController < ApplicationController
+class NewsCommentsController < ApplicationController
 
   before_action :get_news
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @comments = @new.comments
-  end
-
-  def show
-  end
-
-  def new
-    @comment = @new.comments.build
-  end
+  before_action :set_comment, only: [:edit, :update, :destroy]
 
   def create
-    @comment = @new.comments.build(comment_params)
+    @comment = @new.news_comments.build(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-      redirect_to root_path
+      redirect_to news_path(@new)
     else
-      render news_index_path
+      render :new
     end
   end
 
@@ -47,10 +36,11 @@ class CommentsController < ApplicationController
   end
 
   def set_comment
-    @comment = @new.comments.find(params[:id])
+    @comment = @new.news_comments.find(params[:id])
   end
 
   def comment_params
-    params.require(:comment).permit(:body, :news_id)
+    params.require(:news_comment).permit(:body, :news_id)
   end
+
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_24_143844) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_24_210045) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_143844) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "article_comments", force: :cascade do |t|
+    t.string "body"
+    t.integer "user_id", null: false
+    t.integer "article_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_article_comments_on_article_id"
+    t.index ["user_id"], name: "index_article_comments_on_user_id"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -70,14 +80,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_143844) do
     t.integer "category_id", null: false
   end
 
-  create_table "comments", force: :cascade do |t|
+  create_table "forum_comments", force: :cascade do |t|
     t.string "body"
     t.integer "user_id", null: false
-    t.integer "news_id", null: false
+    t.integer "forum_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["news_id"], name: "index_comments_on_news_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["forum_id"], name: "index_forum_comments_on_forum_id"
+    t.index ["user_id"], name: "index_forum_comments_on_user_id"
   end
 
   create_table "forums", force: :cascade do |t|
@@ -97,6 +107,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_143844) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_news_on_user_id"
+  end
+
+  create_table "news_comments", force: :cascade do |t|
+    t.string "body"
+    t.integer "user_id", null: false
+    t.integer "news_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["news_id"], name: "index_news_comments_on_news_id"
+    t.index ["user_id"], name: "index_news_comments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -120,9 +140,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_143844) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "article_comments", "articles"
+  add_foreign_key "article_comments", "users"
   add_foreign_key "articles", "users"
-  add_foreign_key "comments", "news"
-  add_foreign_key "comments", "users"
+  add_foreign_key "forum_comments", "forums"
+  add_foreign_key "forum_comments", "users"
   add_foreign_key "forums", "users"
   add_foreign_key "news", "users"
+  add_foreign_key "news_comments", "news"
+  add_foreign_key "news_comments", "users"
 end

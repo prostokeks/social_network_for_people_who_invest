@@ -9,9 +9,13 @@ Rails.application.routes.draw do
   get 'about', to: 'static_pages#about', as: 'static_pages/about'
 
   resources :news do
-    resources :comments
+    resources :news_comments
   end
-  resources :forums
-  resources :articles
+  resources :forums do
+    resources :forum_comments
+  end
+  resources :articles do
+    resources :article_comments
+  end
 
 end
