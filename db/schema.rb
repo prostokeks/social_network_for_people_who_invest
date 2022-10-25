@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_24_210045) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_25_121710) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -100,6 +100,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_210045) do
     t.index ["user_id"], name: "index_forums_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "room_id", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "news", force: :cascade do |t|
     t.string "title"
     t.string "body"
@@ -117,6 +127,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_210045) do
     t.datetime "updated_at", null: false
     t.index ["news_id"], name: "index_news_comments_on_news_id"
     t.index ["user_id"], name: "index_news_comments_on_user_id"
+  end
+
+  create_table "participants", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_participants_on_room_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_private", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -146,7 +172,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_210045) do
   add_foreign_key "forum_comments", "forums"
   add_foreign_key "forum_comments", "users"
   add_foreign_key "forums", "users"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "news", "users"
   add_foreign_key "news_comments", "news"
   add_foreign_key "news_comments", "users"
+  add_foreign_key "participants", "rooms"
+  add_foreign_key "participants", "users"
 end

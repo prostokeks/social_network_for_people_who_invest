@@ -12,6 +12,11 @@ class User < ApplicationRecord
   has_many :article_comments
   has_many :news_comments
   has_many :forum_comments
+  has_many :messages
+
+  scope :all_except,->(user){where.not(id: user)}
+
+  after_create_commit {broadcast_append_to "users"}
 
   WORKGROUP=["User", "Moderator", "Admin"]
   GENDER=["Male", "Female"]
