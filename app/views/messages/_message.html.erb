@@ -1,7 +1,40 @@
-<div>
-  <% unless message.room.is_private %>
-    <h6><%= message.user.email %></h6>
-  <% end %>
-  <%= message.body %>
-  <%= render "messages/new_message_form" %>
-</div>
+<% if message.user.id == current_user.id %>
+  <div class="w-full flex justify-end mt-3">
+    <div class="w-1/2 ">
+      <div class="flex items-center justify-end">
+        <p class="font-semibold mr-3 text-sm text-gray-400">Me<span
+          class="text-slate-400 text-xs"><%= message.created_at.strftime("%l:%M %p") %></span></p>
+        <% if message.user.avatar.attached? %>
+          <%= image_tag message.user.avatar, class: "h-5 w-5 overflow-hidden rounded-full"%>
+        <% else %>
+          <img class= "h-5 w-5 overflow-hidden rounded-full" src="https://st2.depositphotos.com/47577860/46283/v/450/depositphotos_462836132-stock-illustration-assassin-deadpool-face-icon.jpg" alt="">
+        <% end %>
+      </div>
+      <div class="mt-3 w-full bg-blue-500 p-4 rounded-b-xl rounded-tl-xl">
+        <p class=" text-sm text-white">
+          <%= message.body %>
+        </p>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="w-full flex flex-start">
+    <div class="w-1/2 mt-3">
+      <div class="flex items-center">
+        <% if message.user.avatar.attached? %>
+          <%= image_tag message.user.avatar, class: "h-5 w-5 overflow-hidden rounded-full"%>
+        <% else %>
+          <img class= "h-5 w-5 overflow-hidden rounded-full" src="https://st2.depositphotos.com/47577860/46283/v/450/depositphotos_462836132-stock-illustration-assassin-deadpool-face-icon.jpg" alt="">
+        <% end %>
+        <p class="font-semibold ml-3 text-sm text-gray-400"><%= message.user.name_last_name %><span
+          class="text-slate-400 text-xs"><%= message.created_at.strftime("%l:%M %p") %></span></p>
+      </div>
+
+      <div class="mt-3  bg-slate-50 p-4 rounded-b-xl rounded-tr-xl">
+        <p class=" text-sm text-slate-500">
+          <%= message.body %>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>

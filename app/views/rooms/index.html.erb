@@ -1,24 +1,47 @@
-<div>
-  <h5><%= current_user.email %></h5>
-  <h4>Users</h4>
-  <%= turbo_stream_from "users" %>
-  <div id="users">
-    <%= render @users %>
-  </div>
-  <h4>Rooms</h4>
-  <%= turbo_stream_from "rooms" %>
-  <div id="rooms">
-    <%= render @rooms %>
+<script src="//unpkg.com/alpinejs" defer></script>
+<div class="p-5 h-screen w-full">
+  <div class=" h-full overflow-hidden flex flex-col rounded-xl overflow-hidden shadow-xl bg-gray-700 text-gray-400">
+    <div class="h-full flex">
+      <div class="h-full w-96 border-r flex flex-col">
+        <div class="h-full overflow-x-auto overflow-scroll">
+          <h1 class="px-4 pt-4 pb-2 border-b-4 border-b-blue-500 text-lg font-semibold text-gray-400 uppercase">Users</h1>
+          <%= turbo_stream_from "users" %>
+          <div id="users">
+            <%= render @users %>
+          </div>
+          <h1 class="px-4 pt-4 pb-2 border-b-4 border-b-blue-500 text-lg font-semibold text-gray-400 uppercase">Rooms</h1>
+          <div class="mt-5 w-full flex justify-center">
+            <%= render "rooms/new_room_form" %>
+          </div>
+          <%= turbo_stream_from "rooms" %>
+          <div id="rooms">
+            <%= render @rooms %>
+          </div>
+        </div>
+      </div>
+      <div class="w-full h-full flex flex-col">
+        <% if @single_room %>
+          <div class="h-16 border-b-4 border-b-blue-500 flex justify-between items-center w-full px-5 py-2 shadow-sm">
+            <div id="single_room" class="flex items-center">
+              <% if @user %>
+                <% if @user.avatar.attached? %>
+                  <%= image_tag @user.avatar, class: "h-10 w-10 overflow-hidden rounded-full"%>
+                <% else %>
+                  <img class= "h-10 w-10 overflow-hidden rounded-full" src="https://st2.depositphotos.com/47577860/46283/v/450/depositphotos_462836132-stock-illustration-assassin-deadpool-face-icon.jpg" alt="">
+                <% end %>
+              <% end %>
+              <p class="font-semibold ml-3 text-gray-400"><%= @user&.name_last_name || @single_room.name %></p>
+            </div>
+          </div>
+          <div class="h-full px-10 py-4 overflow-x-auto overflow-scroll">
+            <%= turbo_stream_from @single_room %>
+            <div id="messages">
+              <%= render @messages %>
+            </div>
+          </div>
+          <%= render "messages/new_message_form" %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
-<%= render "rooms/new_room_form" %>
-
-<% if @single_room %>
-<div id="single_room">
-  <h4 class="text-center"><%= @user&.email || @single_room.name %></h4>
-  <%= turbo_stream_from @single_room %>
-  <div id="messages">
-    <%= render @messages %>
-  </div>
-</div>
-<% end %>

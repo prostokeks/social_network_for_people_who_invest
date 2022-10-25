@@ -18,6 +18,10 @@ class User < ApplicationRecord
 
   after_create_commit {broadcast_append_to "users"}
 
+  def name_last_name
+    "#{name} #{last_name}"
+  end
+
   WORKGROUP=["User", "Moderator", "Admin"]
   GENDER=["Male", "Female"]
 
