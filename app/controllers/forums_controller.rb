@@ -17,9 +17,9 @@ class ForumsController < ApplicationController
   def create
     @forum = current_user.forums.build(forum_params)
     if @forum.save
-      redirect_to forums_path
+      redirect_to forum_path(@forum), notice: "Forum was successfully created."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -28,15 +28,15 @@ class ForumsController < ApplicationController
 
   def update
     if @forum.update(forum_params)
-      redirect_to forums_path
+      redirect_to forum_path(@forum), notice: "Forum was successfully updated."
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @forum.destroy
-    redirect_to forums_path, status: :see_other
+    redirect_to forums_path, status: :see_other, notice: "Forum was successfully destroyed."
   end
 
   private

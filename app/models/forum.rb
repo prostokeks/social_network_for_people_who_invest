@@ -10,5 +10,7 @@ class Forum < ApplicationRecord
 
   STATUS=[:passive, :active]
 
+  validates :title, :body, presence: true
+
   #validates :status, inclusion: {in: Forum::STATUS}
 end

@@ -5,8 +5,8 @@
 <p><%= @new.body %></p>
 <p><%= @new.user_id %></p>
 <p><%= @new.categories.map(&:name).sort.join(", ") %></p>
-<p><%= link_to "Edit", edit_article_path(@new) %></p>
-<p><%= link_to "Delete", article_path(@new), data: {"turbo-method": :delete,
+<p><%= link_to "Edit", edit_news_path(@new) %></p>
+<p><%= link_to "Delete", news_path(@new), data: {"turbo-method": :delete,
                                                         turbo_confirm: "You sure?"} %></p>
 <p><%= link_to "Back", :back %></p>
 

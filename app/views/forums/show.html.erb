@@ -5,8 +5,8 @@
 <p><%= @forum.body %></p>
 <p><%= @forum.user_id %></p>
 <p><%= @forum.categories.map(&:name).sort.join(", ") %></p>
-<p><%= link_to "Edit", edit_article_path(@forum) %></p>
-<p><%= link_to "Delete", article_path(@forum), data: {"turbo-method": :delete,
+<p><%= link_to "Edit", edit_forum_path(@forum) %></p>
+<p><%= link_to "Delete", forum_path(@forum), data: {"turbo-method": :delete,
                                                         turbo_confirm: "You sure?"} %></p>
 <p><%= link_to "Back", :back %></p>
 

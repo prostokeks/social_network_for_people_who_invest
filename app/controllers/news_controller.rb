@@ -17,9 +17,9 @@ class NewsController < ApplicationController
   def create
     @new = current_user.news.build(news_params)
     if @new.save
-      redirect_to news_index_path
+      redirect_to news_path(@new), notice: "News was successfully created."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -28,15 +28,15 @@ class NewsController < ApplicationController
 
   def update
     if @new.update(news_params)
-      redirect_to news_index_path
+      redirect_to news_path(@new), notice: "News was successfully updated."
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @new.destroy
-    redirect_to news_index_path, status: :see_other
+    redirect_to news_index_path, status: :see_other, notice: "News was successfully destroyed."
   end
 
   private
