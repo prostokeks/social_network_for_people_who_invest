@@ -17,7 +17,7 @@ class ArticleCommentsController < ApplicationController
   end
 
   def update
-    if @comment.update comment_params
+    if @comment.update(comment_params)
       redirect_to article_path(@article)
     else
       render :update

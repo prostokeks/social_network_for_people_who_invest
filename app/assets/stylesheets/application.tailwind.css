@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.field_with_errors .form-control {
+  border: 1px solid rgb(239 68 68);
+  background-color: rgb(254 242 242);
+}
+
+.field_with_errors label {
+  color: rgb(239 68 68);
+}

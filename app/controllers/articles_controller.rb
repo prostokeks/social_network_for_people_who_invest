@@ -15,11 +15,12 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = current_user.articles.build(articles_params)
+    @article = current_user.articles.build(article_params)
+
     if @article.save
-      redirect_to articles_path
+      redirect_to article_path(@article), notice: "Article was successfully created."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -27,21 +28,21 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if @article.update articles_params
-      redirect_to articles_path
+    if @article.update(article_params)
+      redirect_to article_path(@article), notice: "Article was successfully updated."
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @article.destroy
-    redirect_to articles_path, status: :see_other
+    redirect_to articles_path, status: :see_other, notice: "Article was successfully destroyed."
   end
 
   private
 
-  def articles_params
+  def article_params
     params.require(:article).permit(:title, :body, :status, :avatar, images:[], category_ids:[])
   end
 

@@ -27,7 +27,7 @@ class NewsController < ApplicationController
   end
 
   def update
-    if @new.update news_params
+    if @new.update(news_params)
       redirect_to news_index_path
     else
       render :edit

@@ -1,11 +1,22 @@
 <%= form_with model: @article do |a| %>
+
+  <%= render 'static_pages/errors', object: @article %>
+
   <div>
-    <%= a.label :title %>
-    <%= a.text_field :title %>
+    <div>
+      <%= a.label :title %>
+    </div>
+    <div>
+      <%= a.text_field :title, class: "form-control" %>
+    </div>
   </div>
   <div>
-    <%= a.label :body %>
-    <%= a.text_field :body %>
+    <div>
+      <%= a.label :body %>
+    </div>
+    <div>
+      <%= a.text_field :body, class: "form-control" %>
+    </div>
   </div>
   <div>
     <%= a.label :status %>

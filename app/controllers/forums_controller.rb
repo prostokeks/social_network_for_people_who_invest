@@ -15,7 +15,7 @@ class ForumsController < ApplicationController
   end
 
   def create
-    @forum = current_user.forums.build(forums_params)
+    @forum = current_user.forums.build(forum_params)
     if @forum.save
       redirect_to forums_path
     else
@@ -27,7 +27,7 @@ class ForumsController < ApplicationController
   end
 
   def update
-    if @forum.update forums_params
+    if @forum.update(forum_params)
       redirect_to forums_path
     else
       render :edit
@@ -41,7 +41,7 @@ class ForumsController < ApplicationController
 
   private
 
-  def forums_params
+  def forum_params
     params.require(:forum).permit(:title, :body, :status, :avatar, category_ids:[])
   end
 

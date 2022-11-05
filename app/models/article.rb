@@ -11,4 +11,7 @@ class Article < ApplicationRecord
 
   STATUS=[:passive, :active]
 
+  validates :title, :body, presence: true
+
+
 end

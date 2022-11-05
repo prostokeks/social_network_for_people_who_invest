@@ -17,7 +17,7 @@ class ForumCommentsController < ApplicationController
   end
 
   def update
-    if @comment.update comment_params
+    if @comment.update(comment_params)
       redirect_to forum_path(@forum)
     else
       render :update

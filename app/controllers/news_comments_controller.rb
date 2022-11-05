@@ -17,7 +17,7 @@ class NewsCommentsController < ApplicationController
   end
 
   def update
-    if @comment.update comment_params
+    if @comment.update(comment_params)
       redirect_to news_path(@new)
     else
       render :update

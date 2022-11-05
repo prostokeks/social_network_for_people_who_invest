@@ -1,8 +1,5 @@
 class UsersController < ApplicationController
 
-  def profile
-    @user = User.find(params[:id])
-  end
 
   def show
     @user = User.find(params[:id])
@@ -18,6 +15,10 @@ class UsersController < ApplicationController
     @messages = @single_room.messages.order(create_at: :asc)
 
     render "rooms/index"
+  end
+
+  def profile
+    @user = User.find(params[:id])
   end
 
   private
